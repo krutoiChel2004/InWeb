@@ -1,0 +1,60 @@
+html *
+{
+   font-family: Arial ;
+}
+
+body{
+    background-color: #EDEEF0;
+}
+
+.container_style{
+    display: flex;
+    justify-content: center;
+}
+
+.post_style{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 550px;
+    margin: 15px 0px;
+    padding: 5px 15px;
+}
+
+.heder_post_style{
+    padding: 3px;
+    height: 50px;
+}
+
+.avatar_user_style{
+    background-color: aqua;
+    border-radius: 30px;
+    height: 50px;
+    width: 50px;
+}
+
+.info_user_style{
+    position: relative;
+    height: 50px;
+    left: 60px;
+    bottom: 50px;
+}
+
+.user_name_style{
+    font-size: 30px;
+}
+
+.data_create_style{
+    padding: 2px 0px 0px;
+    color: #818C99;
+    font-size: small;
+    position: relative;
+    left: 10px;
+}
+
+.content_post_style{
+    margin: 20px 0px 0px;
+    word-wrap: break-word;
+    white-space: pre-line;
+    line-height: 20px
+}
+

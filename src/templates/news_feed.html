@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container_style">
+        <div class="content_style">
+            <h1>Posts</h1>
+            <ul>
+                {% for post in posts %}
+                    
+                    <div class="post_style">
+                        <div class="heder_post_style">
+
+                            <div class="avatar_user_style">
+
+                            </div>
+                            <div class="info_user_style">
+                                <div class="user_name_style">
+                                    {{post.name}}
+                                </div>
+
+                                <div class="data_create_style">
+                                    {{post.data_create}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content_post_style">
+                            {{post.text_post}}
+                        </div>    
+                    </div>
+                    
+                {% endfor %}    
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
