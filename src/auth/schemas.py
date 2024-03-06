@@ -1,6 +1,12 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
+from enum import Enum
+
+
+class ModelName(str, Enum):
+    men = 'men'
+    woman = 'woman'
 
 class UserBase(BaseModel):
     username: str
@@ -8,6 +14,10 @@ class UserBase(BaseModel):
     email: Optional[str] = None
     phone: Optional[str] = None
     name: str
-    desc: Optional[str] = None
+    sex: ModelName
+    # desc: Optional[str] = None
     birthday: datetime
-    date_create: datetime
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str

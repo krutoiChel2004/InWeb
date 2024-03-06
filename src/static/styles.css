@@ -5,11 +5,28 @@ html *
 
 body{
     background-color: #EDEEF0;
+    border: none;
 }
 
 .container_style{
     display: flex;
     justify-content: center;
+}
+
+.vertical_menu{
+    width: 200px;
+}
+
+.vertical_menu a{
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical_menu a:hover{
+    background-color: #ccc;
 }
 
 .post_style{
@@ -57,4 +74,5 @@ body{
     white-space: pre-line;
     line-height: 20px
 }
+
 

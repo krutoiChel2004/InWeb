@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, func
 from datetime import datetime
 
-from ..database import Base
+from src.database import Base
 
 class User(Base):
     __tablename__ = "user"
@@ -12,6 +12,7 @@ class User(Base):
     email = Column(String, unique=True)
     phone = Column(String(11), unique=True)
     name = Column(String, nullable=False)
-    desc = Column(String)
+    sex = Column(String, nullable=False)
+    desc = Column(String, unique=True)
     birthday = Column(DateTime, nullable=False)
-    date_create = Column(DateTime, nullable=False, default=datetime.utcnow())
+    date_create = Column(DateTime, nullable=False, default=func.now())

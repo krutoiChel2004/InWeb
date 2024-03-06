@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container_style">
+        <div class="content_style">
+
+            <form class="ui form" action="/auth/create_user" method="post">
+                <h3 class="test_css">Регистраци аккаунта</h3>
+                <div class="field">
+
+                    <label>логин:</label><br>
+                    <input type="text" name="username" placeholder="Введите логин:"><br>
+
+                    <label>пароль:</label><br>
+                    <input type="text" name="hashed_password" placeholder="Введите пароль"><br>
+
+                    <label>mail:</label><br>
+                    <input type="text" name="email" placeholder="Введите mail"><br>
+
+                    <label>телефон:</label><br>
+                    <input type="text" name="phone" placeholder="Введите телефон"><br>
+
+                    <label>имя:</label><br>
+                    <input type="text" name="name" placeholder="Введите имя:"><br>
+
+                    <label>sex:</label><br>
+                    <input type="text" name="sex" placeholder="Введите sex"><br>
+
+                    <label>день рождения:</label><br>
+                    <input type="text" name="birthday" placeholder="Введите день рождения"><br>
+
+                </div>
+                <button class="ui teal basic button" type="submit">Зарегистрироваться</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

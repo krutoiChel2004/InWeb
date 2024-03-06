@@ -7,9 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    
     <div class="container_style">
+        <div class="vertical_menu">
+            <a href="/my_page/">Моя страница</a><br>
+            <a href="/news_feed/">Новости</a><br>
+        </div>
         <div class="content_style">
             <h1>Posts</h1>
+
+            <form class="ui form" action="/posts/add" method="post">
+                <h3 class="test_css">Создвть новую запись</h3>
+                <div class="field">
+                    <label>Что нового?</label><br>
+                    <input type="text" name="text_post" placeholder="Введите текст к посту"><br>
+                    <label>Путь к фото</label><br>
+                    <input type="text" name="path_photo" placeholder="Укажите путь к файлу"><br>
+                </div>
+                <button class="ui teal basic button" type="submit">Добавить</button>
+            </form>
+
             <ul>
                 {% for post in posts %}
                     

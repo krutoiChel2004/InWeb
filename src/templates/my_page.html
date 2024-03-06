@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>
+        {{user_name}}
+    </h1>
+    <div class="container_style">
+        <div class="vertical_menu">
+                <a href="/my_page/">Моя страница</a><br>
+                <a href="/news_feed/">Новости</a><br>
+        </div>
+        <div class="content_style">
+            
+            <ul>
+                {% for my_post in my_posts %}
+                    
+                    <div class="post_style">
+                        <div class="heder_post_style">
+
+                            <div class="avatar_user_style">
+
+                            </div>
+                            <div class="info_user_style">
+                                <div class="user_name_style">
+                                    {{my_post.name}}
+                                </div>
+
+                                <div class="data_create_style">
+                                    {{my_post.data_create}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content_post_style">
+                            {{my_post.text_post}}
+                        </div>  
+                        
+                        <input type="checkbox" id="{{ my_post.id }}" name="post" value="{{ my_post.id }}">
+                    </div>
+                    
+                {% endfor %}    
+            </ul>
+            <button type="button" onclick="sendSelectedPosts()">Удалить</button>
+
+            <script>
+                function sendSelectedPosts() {
+                    var selectedPosts = [];
+                    $('input[name="post"]:checked').each(function() {
+                        selectedPosts.push($(this).val());
+                    });
+        
+                    // Отправляем выбранные посты на сервер
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/posts/del_post/" + selectedPosts.join(','),
+                        success: function(response) {
+                            console.log("Server Response: ", response);
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error:", error);
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
