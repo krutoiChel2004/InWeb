@@ -13,6 +13,7 @@ from src.post.router import router as post_router
 from src.pages.router import router as pages_router
 from src.client.client import router as client_router
 from src.my_page.router import router as my_page_router
+from src.friends.router import router as friends_router
 
 app = FastAPI()
 
@@ -23,6 +24,7 @@ app.mount("/static", StaticFiles(directory="src/static"), name="static")
 app.include_router(auth_router)
 app.include_router(post_router)
 app.include_router(pages_router)
+app.include_router(friends_router)
 app.include_router(client_router)
 app.include_router(my_page_router)
 
