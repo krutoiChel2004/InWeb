@@ -30,13 +30,13 @@ def get_user_JWT_page(
     return templates.TemplateResponse("login.html", {"request": request})
 
 @router.get("/reg/")
-async def register_page(
+def get_register_page(
                     request: Request
                 ):
     return templates.TemplateResponse("reg.html", {"request": request})
 
 @router.get("/my_page/")
-def get_posts_page(
+def get_user_page(
                     request: Request,
                     my_posts = Depends(get_post_user),
                     user_JWT: dict = Depends(get_user_JWT)

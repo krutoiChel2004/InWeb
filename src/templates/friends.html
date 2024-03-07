@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container_style">
+        <div class="vertical_menu">
+            <a href="/my_page/">Моя страница</a><br>
+            <a href="/news_feed/">Новости</a><br>
+            <a href="/friends/">Друзья</a><br>
+        </div>
+        <div class="content_style">
+            <h1>Друзья</h1>
+
+            <ul>
+                {% for friend in friends_list %}
+                    <div class="post_style">
+                        <div class="heder_post_style">
+                            <div class="avatar_user_style">
+
+                            </div>
+                            <div class="info_user_style">
+                                <div class="user_name_style">
+                                    {{friend.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}    
+            </ul>
+        </div>
+        <div>
+            <h2>Заявки в друзья</h2>
+
+            <ul>
+                {% for request in friend_requests %}
+                    
+                    <div class="friend_requests_style">
+                        <div class="heder_post_style">
+                            <div class="avatar_user_style">
+
+                            </div>
+                            <div class="info_user_style">
+                                <div class="user_name_style">
+                                    {{ request.name }}
+                                    {{ request.name }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action_buttons">
+                            <!-- Изменяем кнопку "Добавить" на элемент формы -->
+                            <form method="POST" action="/friends/inv_friend">
+                                <input type="hidden" name="friend_id" value="{{ request.id }}">
+                                <button type="submit">Добавить</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                {% endfor %}    
+                
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

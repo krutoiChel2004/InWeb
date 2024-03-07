@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Form
 from typing import Annotated
 
 from src.database import SessionLocal
@@ -6,7 +6,10 @@ from sqlalchemy.orm import Session
 
 from src.friends.schemas import FriendsBase
 
-from src.friends.service import inv_friends_service, friend_check_list_service, friend_requests_service
+from src.friends.service import send_request_service, \
+                                get_request_service, \
+                                accept_request_service, \
+                                get_mutual_friends_service
 from src.client.client import get_user_JWT
 
 def get_db():
@@ -23,32 +26,40 @@ router = APIRouter(
     tags=["Friends"]
 )
 
-@router.post("/inv_friend")
-async def inv_friends(
+@router.post("/send_request")
+async def send_request(
     db: db_dependency,
-    friend_id: int,
+    friend_id: int = Form(...),
     user_id: dict = Depends(get_user_JWT)
 ):
-    
-    inv_friends = FriendsBase(
+    print(friend_id)
+    request = FriendsBase(
         user_id=user_id.get("id"),
         friend_id=friend_id
     )
 
-    return inv_friends_service(db, inv_friends)
+    return send_request_service(db, request)
 
-@router.get("/friend_list")
-async def friend_list(
-    db: db_dependency,
-    user_id: dict = Depends(get_user_JWT)
-):
-    
-    return friend_check_list_service(db, user_id)
 
-@router.get("/friend_requests_list")
-async def friend_requests_list(
-    db: db_dependency,
-    user_id: dict = Depends(get_user_JWT)
+@router.get("/get_request")
+async def get_request(
+    db: db_dependency, 
+    JWT_user: dict = Depends(get_user_JWT)
 ):
-    
-    return friend_requests_service(db, user_id)
+
+    return get_request_service(db, JWT_user)
+
+@router.put("/accept_request")
+async def accept_request(
+    db: db_dependency,
+    JWT_user: dict = Depends(get_user_JWT),
+    friend_id: int = Form(...),
+):
+    return accept_request_service(db, JWT_user, friend_id)
+
+@router.get("/get_mutual_friends")
+async def get_mutual_friends(
+    db: db_dependency,
+    JWT_user: dict = Depends(get_user_JWT)
+):
+    return get_mutual_friends_service(db, JWT_user)
