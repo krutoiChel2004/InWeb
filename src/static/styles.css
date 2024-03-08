@@ -75,4 +75,10 @@ body{
     line-height: 20px
 }
 
-
+.friend_requests_style{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 200px;
+    margin: 15px 0px;
+    padding: 5px 15px;
+}

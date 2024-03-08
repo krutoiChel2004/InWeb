@@ -32,9 +32,10 @@ def get_request_service(
 ):
     user_id = JWT_user.get("id")
 
-    results = db.query(User, Friends).join(Friends, and_(Friends.user_id == User.id, Friends.friend_id == user_id)).filter(Friends.status=="pending").all()
+    results = db.query(User).join(Friends, and_(Friends.user_id == User.id, 
+                                                Friends.friend_id == user_id)).filter(Friends.status=="pending").all()
 
-    return [{"user":result[0], "request":result[1]} for result in results]
+    return results
 
 def accept_request_service(
     db: Session, 
@@ -61,6 +62,6 @@ def get_mutual_friends_service(
 ):
     user_id = JWT_user.get("id")
 
-    results = db.query(Friends).filter(and_(or_(Friends.user_id==user_id, 
-                                                Friends.friend_id==user_id), Friends.status=="accepted")).all()
+    results = db.query(User).join(Friends, and_(Friends.user_id == User.id, 
+                                                Friends.friend_id == user_id)).filter(Friends.status=="accepted").all()
     return results

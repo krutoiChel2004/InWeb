@@ -4,6 +4,9 @@ from typing import Annotated
 from src.database import SessionLocal
 from sqlalchemy.orm import Session
 
+from starlette.status import HTTP_303_SEE_OTHER
+from starlette.responses import RedirectResponse
+
 from src.friends.schemas import FriendsBase
 
 from src.friends.service import send_request_service, \
@@ -49,13 +52,14 @@ async def get_request(
 
     return get_request_service(db, JWT_user)
 
-@router.put("/accept_request")
+@router.post("/accept_request")
 async def accept_request(
     db: db_dependency,
     JWT_user: dict = Depends(get_user_JWT),
     friend_id: int = Form(...),
 ):
-    return accept_request_service(db, JWT_user, friend_id)
+    accept_request_service(db, JWT_user, friend_id)
+    return RedirectResponse(url='/friends_page', status_code=HTTP_303_SEE_OTHER)
 
 @router.get("/get_mutual_friends")
 async def get_mutual_friends(

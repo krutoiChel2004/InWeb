@@ -8,6 +8,7 @@ from starlette.responses import RedirectResponse
 from src.post.router import get_post
 from src.client.client import get_user_JWT
 from src.my_page.router import get_post_user
+from src.friends.router import get_mutual_friends, get_request
 
 router = APIRouter(
     tags=["Pages"]
@@ -42,4 +43,12 @@ def get_user_page(
                     user_JWT: dict = Depends(get_user_JWT)
                 ):
     return templates.TemplateResponse("my_page.html", {"request": request, "my_posts": my_posts, "user_name": user_JWT.get("username")})
+
+@router.get("/friends_page/")
+def get_friends_page(
+                    request: Request,
+                    list_mutual_friends = Depends(get_mutual_friends),
+                    list_request: dict = Depends(get_request)
+                ):
+    return templates.TemplateResponse("friends_page.html", {"request": request, "list_mutual_friends": list_mutual_friends, "list_request": list_request})
 
