@@ -22,7 +22,6 @@
                     <div class="post_style">
                         <div class="heder_post_style">
                             <div class="avatar_user_style">
-
                             </div>
                             <div class="info_user_style">
                                 <div class="user_name_style">
@@ -30,11 +29,25 @@
                                 </div>
                             </div>
                         </div>
+                        <form action="/friends/remove_from_friends" method="post">
+                            <input type="hidden" name="friend_id" value="{{ friend.id }}">
+                            <button type="submit">Удалить друга</button>
+                        </form>
                     </div>
                 {% endfor %}    
             </ul>
         </div>
         <div>
+            <div>
+                <form class="ui form" action="/friends/send_request" method="post">
+                    <h3 class="test_css">Добавить в друзья</h3>
+                    <div class="field">
+                        <label>ID пользователя:</label><br>
+                        <input type="text" name="friend_id" placeholder="Введите ID"><br>
+                    </div>
+                    <button class="ui teal basic button" type="submit">Отправить запрос</button>
+                </form>
+            </div>
             <h2>Заявки в друзья</h2>
 
             <ul>

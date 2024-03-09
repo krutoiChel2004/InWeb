@@ -12,7 +12,8 @@ from src.friends.schemas import FriendsBase
 from src.friends.service import send_request_service, \
                                 get_request_service, \
                                 accept_request_service, \
-                                get_mutual_friends_service
+                                get_mutual_friends_service, \
+                                remove_from_friends_service
 from src.client.client import get_user_JWT
 
 def get_db():
@@ -67,3 +68,12 @@ async def get_mutual_friends(
     JWT_user: dict = Depends(get_user_JWT)
 ):
     return get_mutual_friends_service(db, JWT_user)
+
+@router.post("/remove_from_friends")
+async def remove_from_friends(
+    db: db_dependency,
+    JWT_user: dict = Depends(get_user_JWT),
+    friend_id: int = Form(...),
+):
+    remove_from_friends_service(db, JWT_user, friend_id)
+    return RedirectResponse(url='/friends_page', status_code=HTTP_303_SEE_OTHER)

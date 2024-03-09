@@ -65,3 +65,18 @@ def get_mutual_friends_service(
     results = db.query(User).join(Friends, and_(Friends.user_id == User.id, 
                                                 Friends.friend_id == user_id)).filter(Friends.status=="accepted").all()
     return results
+
+def remove_from_friends_service(
+    db: Session, 
+    JWT_user: dict,
+    friend_id: int 
+):  
+    user_id = JWT_user.get("id")
+    db.query(Friends).filter(Friends.user_id==user_id, 
+                             Friends.friend_id==friend_id).delete()
+    
+    db.query(Friends).filter(Friends.user_id==friend_id, 
+                             Friends.friend_id==user_id).update({"status":"pending"})
+
+    db.commit()
+    
